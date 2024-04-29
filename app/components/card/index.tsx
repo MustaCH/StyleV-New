@@ -1,7 +1,17 @@
+"use client";
+
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import Link from "next/link";
 
-export default function ProductCard(pic: string) {
+export default function ProductCard({
+  name,
+  price,
+  pic,
+}: {
+  name: string;
+  price: number;
+  pic: string;
+}) {
   return (
     <Card className="py-4" isPressable>
       <Link href={"category/product"}>
@@ -10,13 +20,13 @@ export default function ProductCard(pic: string) {
             isBlurred
             alt="Card background"
             className="object-cover rounded-xl"
-            src="https://i.ibb.co/H4vWTkx/image.png"
+            src={pic}
             width={270}
           />
         </CardBody>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <h4 className="font-bold text-large">Set 3 piezas</h4>
-          <p className="text-tiny uppercase font-bold">$73,500</p>
+          <h4 className="font-bold text-large">{name}</h4>
+          <p className="text-tiny uppercase font-bold">${price}</p>
           <small className="text-default-500">Envío incluído</small>
         </CardHeader>
       </Link>

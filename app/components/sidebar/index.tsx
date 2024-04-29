@@ -7,9 +7,11 @@ import { Badge, Switch, Tooltip } from "@nextui-org/react";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { IoSunnySharp } from "react-icons/io5";
 import { useTheme } from "next-themes";
+import { useCartContext } from "@/app/providers";
 
 function Sidebar() {
   const { theme, setTheme } = useTheme();
+  const { cart } = useCartContext();
 
   return (
     <nav className="hidden lg:flex flex-col fixed z-50 justify-between bg-gray-100 dark:bg-neutral-900 dark:text-white h-screen w-fit text-3xl px-6 py-6 shadow-2xl">
@@ -36,7 +38,7 @@ function Sidebar() {
           <Link href={"/pages/cart"}>
             <Badge
               color="danger"
-              content={50}
+              content={cart.length}
               isInvisible={false}
               shape="circle"
             >

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Category() {
   return (
-    <Link href={""} className="flex justify-center">
+    <Link href={"products/category"} className="flex justify-center">
       <Card
         isFooterBlurred
         radius="lg"
@@ -23,7 +23,7 @@ export default function Category() {
         />
         <CardFooter className="justify-center   overflow-hidden py-1 absolute before:rounded-xl rounded-br-large rounded-bl-large bottom-0 w-full shadow-small  z-10">
           <Button
-            className="text-medium text-white bg-black/20 group-hover:bg-white dark:group-hover:bg-black group-hover:text-white"
+            className="text-medium text-white bg-black/20 group-hover:bg-white group-hover:text-black dark:group-hover:bg-black dark:group-hover:text-white"
             variant="flat"
             color="default"
             radius="lg"

@@ -17,30 +17,26 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { useRouter } from "next/navigation";
 
-export default function Product(name: string, price: number, pic: string) {
-  const images = [
-    {
-      original: "https://i.ibb.co/H4vWTkx/image.png",
-      thumbnail: "https://i.ibb.co/H4vWTkx/image.png",
-      alt: "foto de producto",
-    },
-    {
-      original: "https://i.ibb.co/H4vWTkx/image.png",
-      thumbnail: "https://i.ibb.co/H4vWTkx/image.png",
-      alt: "foto de producto",
-    },
-    {
-      original: "https://i.ibb.co/H4vWTkx/image.png",
-      thumbnail: "https://i.ibb.co/H4vWTkx/image.png",
-      alt: "foto de producto",
-    },
-    {
-      original: "https://i.ibb.co/H4vWTkx/image.png",
-      thumbnail: "https://i.ibb.co/H4vWTkx/image.png",
-      alt: "foto de producto",
-    },
-  ];
+interface ProductProps {
+  name: string;
+  price: number;
+  pics: string[];
+  measures: string[];
+  color: string;
+  addToCart: (product: ProductProps) => void;
+}
+
+export default function Product({
+  name,
+  price,
+  pics,
+  color,
+  measures,
+  addToCart,
+}: ProductProps) {
+  const routes = useRouter();
 
   return (
     <Card className="py-4 w-fit">
@@ -50,20 +46,20 @@ export default function Product(name: string, price: number, pic: string) {
           modules={[Pagination]}
           className="w-full lg:w-[500px]"
         >
-          {images.map((image, index) => (
+          {pics.map((image, index) => (
             <SwiperSlide key={index} className="w-fit">
               <Image
-                alt={image.alt}
+                alt={name}
                 className="object-cover rounded-xl w-92"
-                src={image.original}
+                src={image}
               />
             </SwiperSlide>
           ))}
         </Swiper>
         <div className="flex flex-col gap-4">
-          <h4 className="font-bold text-3xl">Saco 3 piezas</h4>
-          <small className="text-xl">$85000</small>
-          <p>Color: Gris</p>
+          <h4 className="font-bold text-3xl">{name}</h4>
+          <p className="text-xl">${price}</p>
+          <p className="capitalize text-xs">Color: {color}</p>
           <p className="uppercase ">Tabla de medidas:</p>
           <Table aria-label="Tabla de medidas">
             <TableHeader>
@@ -74,17 +70,29 @@ export default function Product(name: string, price: number, pic: string) {
             </TableHeader>
             <TableBody>
               <TableRow key="1">
-                <TableCell>60cm</TableCell>
-                <TableCell>40cm</TableCell>
-                <TableCell>30cm</TableCell>
-                <TableCell>70cm</TableCell>
+                <TableCell>{measures[0]}</TableCell>
+                <TableCell>{measures[1]}</TableCell>
+                <TableCell>{measures[2]}</TableCell>
+                <TableCell>{measures[3]}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
-          <Button className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white">
+          <Button
+            onClick={() => {
+              routes.push("/pages/cart");
+              addToCart({ name, price, pics, measures, color, addToCart });
+            }}
+            color="primary"
+            className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
+          >
             Comprar
           </Button>
-          <Button className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white">
+          <Button
+            onClick={() =>
+              addToCart({ name, price, pics, measures, color, addToCart })
+            }
+            className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
+          >
             Agregar al carrito
           </Button>
         </div>
