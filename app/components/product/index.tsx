@@ -18,15 +18,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { useRouter } from "next/navigation";
-
-interface ProductProps {
-  name: string;
-  price: number;
-  pics: string[];
-  measures: string[];
-  color: string;
-  addToCart: (product: ProductProps) => void;
-}
+import { ProductType } from "@/app/types";
 
 export default function Product({
   name,
@@ -34,8 +26,7 @@ export default function Product({
   pics,
   color,
   measures,
-  addToCart,
-}: ProductProps) {
+}: ProductType) {
   const routes = useRouter();
 
   return (
@@ -80,19 +71,13 @@ export default function Product({
           <Button
             onClick={() => {
               routes.push("/pages/cart");
-              addToCart({ name, price, pics, measures, color, addToCart });
             }}
             color="primary"
             className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
           >
             Comprar
           </Button>
-          <Button
-            onClick={() =>
-              addToCart({ name, price, pics, measures, color, addToCart })
-            }
-            className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
-          >
+          <Button className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white">
             Agregar al carrito
           </Button>
         </div>

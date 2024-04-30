@@ -3,20 +3,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-
-type Product = {
-  id: number;
-  name: string;
-  quantity: number;
-  price: number;
-  pics: string[];
-  medidas: string[];
-  color: string;
-};
+import { ProductType } from "./types";
 
 type CartContextType = {
-  cart: Product[];
-  addToCart: (product: Product) => void;
+  cart: ProductType[];
+  addToCart: (product: ProductType) => void;
   clearCart: () => void;
   deleteProduct: (productId: number) => void;
 };
@@ -30,8 +21,10 @@ const CartContext = createContext<CartContextType>({
 
 export const useCartContext = () => useContext(CartContext);
 
-const CartProvider: React.FC = ({ children }) => {
-  const [cart, setCart] = useState<Product[]>([]);
+const CartProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
+  const [cart, setCart] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -42,7 +35,7 @@ const CartProvider: React.FC = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: ProductType) => {
     const existingProduct = cart.find((item) => item.id === product.id);
 
     if (existingProduct) {
@@ -74,7 +67,9 @@ const CartProvider: React.FC = ({ children }) => {
   );
 };
 
-export const Providers: React.FC = ({ children }) => (
+export const Providers: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => (
   <CartProvider>
     <NextUIProvider>
       <NextThemesProvider
