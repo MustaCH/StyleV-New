@@ -19,6 +19,8 @@ export default function PageHeader() {
       setRoute("Contacto.");
     } else if (router === "/pages/cart") {
       setRoute("Carrito.");
+    } else if (router === "/pages/category") {
+      setRoute("Productos.");
     } else {
       setRoute("");
     }

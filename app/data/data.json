@@ -1,75 +1,60 @@
-{
-  "categorias": [
-    {
-      "id": 1,
-      "nombre": "Sets",
-      "subtitulo": "Lo que quieras en...",
-      "productos": [
-        {
-          "id": 1,
-          "name": "Set 3 piezas",
-          "quantity": 1,
-          "price": 85000,
-          "pics": [
-            "https://i.ibb.co/sQXyFZr/image.png",
-            "https://i.ibb.co/dgGHNYj/image.png",
-            "https://i.ibb.co/ZGcB0rt/image.png"
-          ],
-          "measures": { "A": "60cm", "B": "40cm", "C": "50cm", "D": "70cm" },
-          "color": "Gris",
-          "category": "Sets"
-        },
-        {
-          "id": 2,
-          "name": "Set 2 piezas",
-          "quantity": 1,
-          "price": 120000,
-          "pics": [
-            "https://i.ibb.co/5KkSJrX/image.png",
-            "https://i.ibb.co/LChYynC/image.png",
-            "https://i.ibb.co/cD04RKB/image.png"
-          ],
-          "measures": { "A": "50cm", "B": "45cm", "C": "62cm", "D": "73cm" },
-          "color": "Negro",
-          "category": "Sets"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "nombre": "Pants",
-      "subtitulo": "Lo mejor de...",
-      "productos": [
-        {
-          "id": 3,
-          "name": "Pant Black",
-          "quantity": 1,
-          "price": 29500,
-          "pics": [
-            "https://i.ibb.co/YBx4H2f/image.png",
-            "https://i.ibb.co/PM0J9vh/image.png",
-            "https://i.ibb.co/zfBjMMQ/image.png"
-          ],
+[
+  {
+    "id": 1,
+    "name": "Set 3 piezas",
+    "quantity": 1,
+    "price": 85000,
+    "pics": [
+      "https://i.ibb.co/sQXyFZr/image.png",
+      "https://i.ibb.co/dgGHNYj/image.png",
+      "https://i.ibb.co/ZGcB0rt/image.png"
+    ],
+    "measures": { "A": "60cm", "B": "40cm", "C": "50cm", "D": "70cm" },
+    "color": "Gris",
+    "category": "Sets"
+  },
+  {
+    "id": 2,
+    "name": "Set 2 piezas",
+    "quantity": 1,
+    "price": 120000,
+    "pics": [
+      "https://i.ibb.co/5KkSJrX/image.png",
+      "https://i.ibb.co/LChYynC/image.png",
+      "https://i.ibb.co/cD04RKB/image.png"
+    ],
+    "measures": { "A": "50cm", "B": "45cm", "C": "62cm", "D": "73cm" },
+    "color": "Negro",
+    "category": "Sets"
+  },
 
-          "measures": { "A": "50cm", "B": "45cm", "C": "62cm", "D": "73cm" },
-          "color": "Negro y bronce",
-          "category": "Pants"
-        },
-        {
-          "id": 4,
-          "name": "Pant Corderoy Beige",
-          "quantity": 1,
-          "price": 3500,
-          "pics": [
-            "https://i.ibb.co/Kj78nzp/image.png",
-            "https://i.ibb.co/h9ynHN7/image.png",
-            "https://i.ibb.co/qjGc5Lg/image.png"
-          ],
-          "measures": { "A": "50cm", "B": "45cm", "C": "62cm", "D": "73cm" },
-          "color": "Beige",
-          "category": "Pants"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "id": 3,
+    "name": "Pant Black",
+    "quantity": 1,
+    "price": 29500,
+    "pics": [
+      "https://i.ibb.co/YBx4H2f/image.png",
+      "https://i.ibb.co/PM0J9vh/image.png",
+      "https://i.ibb.co/zfBjMMQ/image.png"
+    ],
+
+    "measures": { "A": "50cm", "B": "45cm", "C": "62cm", "D": "73cm" },
+    "color": "Negro y bronce",
+    "category": "Pants"
+  },
+  {
+    "id": 4,
+    "name": "Pant Corderoy Beige",
+    "quantity": 1,
+    "price": 3500,
+    "pics": [
+      "https://i.ibb.co/Kj78nzp/image.png",
+      "https://i.ibb.co/h9ynHN7/image.png",
+      "https://i.ibb.co/qjGc5Lg/image.png"
+    ],
+    "measures": { "A": "50cm", "B": "45cm", "C": "62cm" },
+    "color": "Beige",
+    "category": "Pants"
+  }
+]

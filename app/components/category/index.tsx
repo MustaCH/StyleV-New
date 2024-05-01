@@ -16,14 +16,14 @@ export default function CategoryCard({
       radius="lg"
       className="border-none w-fit group lg:w-[85%]"
     >
-      <CardHeader className="absolute z-50 top-1 flex-col gap-1 !items-start ">
-        <p className="text-tiny text-white/60 font-bold ">{sub}</p>
+      <CardHeader className="absolute z-40 top-1 flex-col gap-1 !items-start ">
+        {/* {<p className="text-tiny text-white/60 font-bold ">{sub}</p>} */}
         <h4 className="text-white font-medium text-5xl  uppercase">{name}</h4>
       </CardHeader>
       <Image
         isBlurred
         alt={name}
-        className="object-cover brightness-50"
+        className="object-cover brightness-50 lg:w-[500px]"
         src={pic}
       />
       <CardFooter className="justify-center   overflow-hidden py-1 absolute before:rounded-xl rounded-br-large rounded-bl-large bottom-0 w-full shadow-small  z-10">
