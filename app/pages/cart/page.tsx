@@ -7,13 +7,14 @@ import Link from "next/link";
 
 export default function Cart() {
   const { cart, clearCart } = useCartContext();
+  console.log(cart);
 
   return (
     <div className=" lg:grid place-content-center">
       <div className="flex flex-col  lg:w-[50vw]  gap-6 lg:gap-0 py-6 ">
         <div className="flex flex-col  gap-4 mb-64 lg:mb-8  w-full">
-          {cart.map((item, index) => (
-            <CartItem key={index} product={item} />
+          {cart.map((item, id) => (
+            <CartItem key={id} product={item} />
           ))}
         </div>
         <div className="fixed bottom-14 w-full lg:static flex flex-col gap-8 px-6 py-8 bg-neutral-100 dark:bg-neutral-800 lg:rounded-lg">

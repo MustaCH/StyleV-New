@@ -5,8 +5,10 @@ import { IoMdClose } from "react-icons/io";
 import { useCartContext } from "@/app/providers";
 import { ProductType } from "@/app/types";
 
-export default function CartItem({ id, name, pics, price }: ProductType) {
+export default function CartItem({ product }: { product: ProductType }) {
   const { deleteProduct } = useCartContext();
+
+  const { id, name, pics, price } = product;
 
   return (
     <div className="relative flex items-center justify-between mx-2 px-4 py-3  bg-neutral-100 dark:bg-neutral-700 rounded-lg drop-shadow-md">
@@ -23,12 +25,18 @@ export default function CartItem({ id, name, pics, price }: ProductType) {
       <User
         name={name}
         description={
-          <Link href="/" className="text-blue-500">
+          <Link
+            href={{
+              pathname: "product",
+              query: { _id: product.id },
+            }}
+            className="text-blue-500"
+          >
             Ver producto
           </Link>
         }
         avatarProps={{
-          src: pics[0],
+          src: pics && pics.length > 0 ? pics[0] : undefined,
         }}
       />
       <Chip

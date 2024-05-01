@@ -8,7 +8,7 @@ export interface ProductType {
     A: string;
     B: string;
     C: string;
-    D: string;
+    D?: string;
   };
   color: string;
   category: string;

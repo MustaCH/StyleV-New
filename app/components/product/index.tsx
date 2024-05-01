@@ -12,6 +12,7 @@ import {
   TableRow,
   TableCell,
   Spinner,
+  Divider,
 } from "@nextui-org/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +21,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { useRouter } from "next/navigation";
 import { ProductType } from "@/app/types";
+import { useCartContext } from "@/app/providers";
 
 export default function Product({
   id,
@@ -32,9 +34,10 @@ export default function Product({
   quantity,
 }: ProductType) {
   const routes = useRouter();
+  const { addToCart } = useCartContext();
 
   return (
-    <Card key={id} className="py-4 w-fit">
+    <Card key={id} className="py-4 w-fit mx-2 lg:mx-0">
       <CardBody className="overflow-visible py-2 flex flex-col gap-4 lg:flex-row lg:gap-12">
         {pics ? (
           <Swiper
@@ -63,11 +66,13 @@ export default function Product({
           <Table aria-label="Tabla de medidas">
             <TableHeader>
               {Object.keys(measures).map((measureKey) => (
-                <TableColumn key={measureKey}>{measureKey}</TableColumn>
+                <TableColumn className="text-center" key={measureKey}>
+                  {measureKey}
+                </TableColumn>
               ))}
             </TableHeader>
             <TableBody>
-              <TableRow key="1">
+              <TableRow className="text-center" key="1">
                 {Object.values(measures).map((measureValue) => (
                   <TableCell key={measureValue}>{measureValue}</TableCell>
                 ))}
@@ -76,14 +81,37 @@ export default function Product({
           </Table>
           <Button
             onClick={() => {
-              routes.push("/pages/cart");
+              addToCart({
+                id,
+                name,
+                price,
+                pics,
+                color,
+                measures,
+                category,
+                quantity,
+              });
             }}
             color="primary"
             className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
           >
             Comprar
           </Button>
-          <Button className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white">
+          <Button
+            onClick={() => {
+              addToCart({
+                id,
+                name,
+                price,
+                pics,
+                color,
+                measures,
+                category,
+                quantity,
+              });
+            }}
+            className="hover:bg-black hover:text-white dark:hover:text-black dark:hover:bg-white"
+          >
             Agregar al carrito
           </Button>
         </div>

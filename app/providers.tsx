@@ -24,7 +24,14 @@ export const useCartContext = () => useContext(CartContext);
 const CartProvider: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
-  const [cart, setCart] = useState<ProductType[]>([]);
+  const [cart, setCart] = useState<ProductType[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      return savedCart;
+    } else {
+      return [];
+    }
+  });
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");

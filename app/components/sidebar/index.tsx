@@ -8,6 +8,7 @@ import { HiOutlineMoon } from "react-icons/hi2";
 import { IoSunnySharp } from "react-icons/io5";
 import { useTheme } from "next-themes";
 import { useCartContext } from "@/app/providers";
+import { useState } from "react";
 
 function Sidebar() {
   const { theme, setTheme } = useTheme();

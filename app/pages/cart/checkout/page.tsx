@@ -8,7 +8,7 @@ import Link from "next/link";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import { MercadoPagoButton } from "@/app/components/mp-button";
-import { Product } from "@/app/components";
+import { CartItem, CheckoutItem, Product } from "@/app/components";
 
 export default function Checkout() {
   initMercadoPago("YOUR_PUBLIC_KEY", {
@@ -39,10 +39,8 @@ export default function Checkout() {
   };
 
   const handlePayment = () => {
-    // Validar los campos antes de continuar
     const isValid = validateForm();
     if (isValid) {
-      // Si los campos son válidos, continuar con el pago
       const userData = { ...formData };
       const data = {
         userData,
@@ -50,14 +48,12 @@ export default function Checkout() {
       };
       createOrder(data);
       routes.push("/pages/payments/confirmation");
-      // Aquí podrías redirigir al usuario a la pasarela de pago externa
     } else {
       alert("Todos los campos obligatorios deben ser completados.");
     }
   };
 
   const validateForm = () => {
-    // Verificar que todos los campos obligatorios estén completos
     const isValid = Object.values(formData).every(isFieldValid);
     setFormValidity(isValid);
     return isValid;
@@ -102,7 +98,20 @@ export default function Checkout() {
   return (
     <div className="lg:grid place-content-center my-10">
       <h2 className="text-center text-3xl uppercase font-semibold">Checkout</h2>
-      <Divider className="mt-4" />
+      <Divider className="my-4" />
+      <div>
+        {cart.map((item, id) => (
+          <CheckoutItem key={id} product={item} />
+        ))}
+      </div>
+      <Divider className="my-4" />
+      <div className="flex justify-between items-center mx-6 my-4">
+        <p className="text-xl font-bold">Total:</p>
+        <p className="text-lg dark:text-white/80">
+          ${cart.reduce((total, item) => total + item.price, 0)}
+        </p>
+      </div>
+      <Divider className="my-4" />
       <div className="flex flex-col gap-4 my-8 mx-2 lg:mx-0 lg:w-[25vw]">
         <p className="text-2xl">Tus datos:</p>
         <Input

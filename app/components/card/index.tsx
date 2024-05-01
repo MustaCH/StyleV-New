@@ -2,7 +2,6 @@
 
 import { ProductType } from "@/app/types";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import Link from "next/link";
 
 interface Props {
   data: ProductType;

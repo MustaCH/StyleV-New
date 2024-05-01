@@ -6,3 +6,4 @@ export { default as CategoryCard } from "./category";
 export { default as PageHeader } from "./page-header";
 export { default as Product } from "./product";
 export { default as CartItem } from "./cart-item";
+export { default as CheckoutItem } from "./checkout-item";

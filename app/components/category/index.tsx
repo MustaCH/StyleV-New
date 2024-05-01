@@ -1,5 +1,4 @@
 import { Card, CardFooter, CardHeader, Image, Button } from "@nextui-org/react";
-import Link from "next/link";
 
 export default function CategoryCard({
   name,

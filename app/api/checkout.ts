@@ -1,7 +1,7 @@
 import mercadopago from "mercadopago";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Product } from "../providers";
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
+import { ProductType } from "../types";
 
 mercadopago.configure({
   access_token: process.env.NEXT_ACCESS_TOKEN!,
@@ -9,7 +9,7 @@ mercadopago.configure({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const product: Product = req.body.product;
+    const product: ProductType = req.body.product;
 
     const URL = "https://4680-186-148-116-135.ngrok-free.app";
 
