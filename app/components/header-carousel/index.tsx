@@ -3,7 +3,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
-function HeaderCarousel({ auto = true, slides }) {
+type Slide = {
+  url: string;
+  // Otras propiedades si las hay
+};
+
+function HeaderCarousel({
+  auto = true,
+  slides,
+}: {
+  auto?: boolean;
+  slides: Slide[];
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
@@ -25,7 +36,7 @@ function HeaderCarousel({ auto = true, slides }) {
   }, [currentIndex, slides.length]);
 
   useEffect(() => {
-    let intervalId: string;
+    let intervalId: NodeJS.Timeout;
 
     if (auto) {
       intervalId = setInterval(() => {
