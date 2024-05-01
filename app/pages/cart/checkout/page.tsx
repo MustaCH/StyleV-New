@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
-import { MercadoPagoButton } from "@/app/components/mp-button";
-import { CartItem, CheckoutItem, Product } from "@/app/components";
+//import { MercadoPagoButton } from "@/app/components/mp-button";
+import { CheckoutItem, Product } from "@/app/components";
 
 export default function Checkout() {
   initMercadoPago("YOUR_PUBLIC_KEY", {
@@ -239,7 +239,7 @@ export default function Checkout() {
         <Button color="primary" onClick={handlePayment}>
           Pagar
         </Button>
-        <MercadoPagoButton product={Product} />
+        {/* <MercadoPagoButton product={Product} /> */}
         <Button color="danger" variant="bordered">
           Cancelar
         </Button>
