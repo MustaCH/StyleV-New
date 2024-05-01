@@ -6,7 +6,7 @@ import { ProductType } from "@/app/types";
 export default function AllProducts() {
   const uniqueCategories: { [key: string]: ProductType } = {};
 
-  data.forEach((product: ProductType) => {
+  data.forEach((product: any) => {
     if (!uniqueCategories[product.category]) {
       uniqueCategories[product.category] = product;
     }
