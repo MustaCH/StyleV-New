@@ -1,4 +1,4 @@
-import { Category, Header } from "./components";
+import { Header } from "./components";
 
 export default function Home() {
   const categories = [
