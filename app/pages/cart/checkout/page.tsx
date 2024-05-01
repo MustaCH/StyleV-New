@@ -5,15 +5,9 @@ import { Button, Divider, Input } from "@nextui-org/react";
 import { useCartContext } from "@/app/providers";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import axios from "axios";
-//import { MercadoPagoButton } from "@/app/components/mp-button";
-import { CheckoutItem, Product } from "@/app/components";
+import { CheckoutItem } from "@/app/components";
 
 export default function Checkout() {
-  initMercadoPago("YOUR_PUBLIC_KEY", {
-    locale: "es-AR",
-  });
   const routes = useRouter();
   const { cart } = useCartContext();
   const [formData, setFormData] = useState({
@@ -239,7 +233,6 @@ export default function Checkout() {
         <Button color="primary" onClick={handlePayment}>
           Pagar
         </Button>
-        {/* <MercadoPagoButton product={Product} /> */}
         <Button color="danger" variant="bordered">
           Cancelar
         </Button>
