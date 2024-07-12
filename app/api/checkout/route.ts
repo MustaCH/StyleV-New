@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const items = cart.map((product: ProductType) => ({
       title: product.name,
       unit_price: product.price,
-      quantity: product.quantity,
+      quantity: 1,
     }));
 
     const preference: CreatePreferencePayload = {

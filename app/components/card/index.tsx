@@ -9,7 +9,7 @@ interface Props {
 
 export default function ProductCard({ data }: Props) {
   return (
-    <Card key={data.id} className="py-4" isPressable>
+    <Card key={data._id} className="py-4" isPressable>
       <CardBody className="overflow-visible py-2">
         <Image
           isBlurred
