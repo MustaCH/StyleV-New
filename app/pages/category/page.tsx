@@ -53,8 +53,8 @@ export default function Category({ searchParams }: Props) {
         {products.map((product) => (
           <Link
             href={{
-              pathname: "product",
-              query: { _id: product._id },
+              pathname: "/product",
+              query: { _id: product._id.toString() },
             }}
             key={product._id}
           >
