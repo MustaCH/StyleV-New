@@ -21,9 +21,6 @@ const ProductPage = ({ searchParams }: Props) => {
         console.error("Product ID is required");
         return;
       }
-
-      console.log("Product ID:", id);
-
       const response = await fetch(`/api/products/${id}`);
       if (!response.ok) {
         console.error("Failed to fetch product", response.status);
