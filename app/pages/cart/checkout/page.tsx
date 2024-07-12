@@ -5,7 +5,8 @@ import { Button, Divider, Input } from "@nextui-org/react";
 import { useCartContext } from "@/app/providers";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { CheckoutItem } from "@/app/components";
+import { CheckoutItem, MpButton } from "@/app/components";
+import { Product } from "@/app/mock/Producto";
 
 export default function Checkout() {
   const routes = useRouter();
@@ -84,8 +85,7 @@ export default function Checkout() {
       userData: data.userData,
       products: data.cart,
     };
-    console.log("Orden de Pedido:");
-    console.log(order); // Imprimir la orden por consola
+
     localStorage.setItem("order", JSON.stringify(order));
   }
 
@@ -230,9 +230,7 @@ export default function Checkout() {
         />
       </div>
       <div className="flex flex-col gap-2 mx-2">
-        <Button color="primary" onClick={handlePayment}>
-          Pagar
-        </Button>
+        <MpButton isFormCompleted={true} cart={cart} />
         <Button color="danger" variant="bordered">
           Cancelar
         </Button>

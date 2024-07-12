@@ -1,8 +1,10 @@
+"use client";
+
 import { Card } from "@/app/components";
-import data from "../../data/data.json";
 import { ProductType } from "@/app/types";
 import Link from "next/link";
 import { Spinner } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 type Props = {
   searchParams: {
@@ -11,34 +13,44 @@ type Props = {
 };
 
 export default function Category({ searchParams }: Props) {
-  const getCategoryById = (categoryId: string) => {
-    return data.filter((cat) => cat.category === categoryId);
-  };
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const cat = getCategoryById(
-    Array.isArray(searchParams?._id)
-      ? searchParams._id[0]
-      : searchParams._id || ""
-  );
+  useEffect(() => {
+    async function fetchData() {
+      const categoryId = Array.isArray(searchParams?._id)
+        ? searchParams._id[0]
+        : searchParams._id || "";
+
+      const response = await fetch(`/api/products?category=${categoryId}`);
+      const data: ProductType[] = await response.json();
+
+      setProducts(data);
+      setLoading(false);
+    }
+
+    fetchData();
+  }, [searchParams]);
+
   const categoryName = searchParams._id;
 
   return (
     <div>
       <div className="flex justify-center">
-        {cat ? (
-          <p className="text-3xl uppercase font-bold">{categoryName}</p>
-        ) : (
+        {loading ? (
           <Spinner size="lg" />
+        ) : (
+          <p className="text-3xl uppercase font-bold">{categoryName}</p>
         )}
       </div>
       <div className="flex flex-wrap justify-center gap-4 py-12">
-        {cat?.map((product: ProductType) => (
+        {products.map((product) => (
           <Link
             href={{
               pathname: "product",
-              query: { _id: product.id },
+              query: { _id: product._id },
             }}
-            key={product.id}
+            key={product._id}
           >
             <Card data={product} />
           </Link>

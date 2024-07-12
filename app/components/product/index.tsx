@@ -24,7 +24,7 @@ import { ProductType } from "@/app/types";
 import { useCartContext } from "@/app/providers";
 
 export default function Product({
-  id,
+  _id,
   name,
   price,
   pics,
@@ -37,7 +37,7 @@ export default function Product({
   const { addToCart } = useCartContext();
 
   return (
-    <Card key={id} className="py-4 w-fit mx-2 lg:mx-0">
+    <Card key={_id} className="py-4 w-fit mx-2 lg:mx-0">
       <CardBody className="overflow-visible py-2 flex flex-col gap-4 lg:flex-row lg:gap-12">
         {pics ? (
           <Swiper
@@ -82,7 +82,7 @@ export default function Product({
           <Button
             onClick={() => {
               addToCart({
-                id,
+                _id,
                 name,
                 price,
                 pics,
@@ -100,7 +100,7 @@ export default function Product({
           <Button
             onClick={() => {
               addToCart({
-                id,
+                _id,
                 name,
                 price,
                 pics,

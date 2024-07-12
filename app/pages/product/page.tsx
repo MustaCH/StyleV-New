@@ -1,8 +1,8 @@
 "use client";
 
 import { Product } from "@/app/components";
-import data from "../../data/data.json";
 import { Spinner } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 type Props = {
   searchParams: {
@@ -11,29 +11,39 @@ type Props = {
 };
 
 const ProductPage = ({ searchParams }: Props) => {
-  const idString = searchParams._id;
-  const id = parseInt(idString);
-  const getProductById = (productId: number) => {
-    return data.find((prod) => prod.id === productId);
-  };
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const product = getProductById(id || 0);
+  useEffect(() => {
+    async function fetchData() {
+      const id = searchParams._id;
+      const response = await fetch(`/api/products/${id}`);
+      const data = await response.json();
+
+      setProduct(data);
+      setLoading(false);
+    }
+
+    fetchData();
+  }, [searchParams]);
 
   return (
     <div className="flex justify-center py-12">
-      {product ? (
-        <Product
-          id={product.id}
-          name={product.name}
-          price={product.price}
-          pics={product.pics}
-          color={product.color}
-          measures={product.measures}
-          quantity={product.quantity}
-          category={product.category}
-        />
-      ) : (
+      {loading ? (
         <Spinner size="lg" />
+      ) : (
+        product && (
+          <Product
+            _id={product._id}
+            name={product.name}
+            price={product.price}
+            pics={product.pics}
+            color={product.color}
+            measures={product.measures}
+            quantity={product.quantity}
+            category={product.category}
+          />
+        )
       )}
     </div>
   );

@@ -28,7 +28,7 @@ export default function Cart() {
           <div className="flex flex-col gap-4">
             <Link
               href="/pages/cart/checkout"
-              className="text-center bg-blue-600 py-3 rounded-large"
+              className="text-center text-white bg-blue-600 py-3 rounded-large"
             >
               Pagar
             </Link>
