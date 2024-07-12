@@ -6,12 +6,24 @@ import { useCartContext } from "@/app/providers";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CheckoutItem, MpButton } from "@/app/components";
-import { Product } from "@/app/mock/Producto";
+
+type FormData = {
+  name: string;
+  lastname: string;
+  id: string;
+  email: string;
+  phone: string;
+  postal: string;
+  local: string;
+  street: string;
+  number: string;
+  oth: string;
+};
 
 export default function Checkout() {
   const routes = useRouter();
   const { cart } = useCartContext();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     lastname: "",
     id: "",
@@ -23,7 +35,20 @@ export default function Checkout() {
     number: "",
     oth: "",
   });
-  const [formValidity, setFormValidity] = useState(false);
+
+  const [touched, setTouched] = useState({
+    name: false,
+    lastname: false,
+    id: false,
+    email: false,
+    phone: false,
+    postal: false,
+    local: false,
+    street: false,
+    number: false,
+  });
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,31 +56,32 @@ export default function Checkout() {
       ...prevFormData,
       [name]: value,
     }));
-  };
-
-  const handlePayment = () => {
-    const isValid = validateForm();
-    if (isValid) {
-      const userData = { ...formData };
-      const data = {
-        userData,
-        cart,
-      };
-      createOrder(data);
-      routes.push("/pages/payments/confirmation");
-    } else {
-      alert("Todos los campos obligatorios deben ser completados.");
-    }
-  };
-
-  const validateForm = () => {
-    const isValid = Object.values(formData).every(isFieldValid);
-    setFormValidity(isValid);
-    return isValid;
+    setTouched((prevTouched) => ({
+      ...prevTouched,
+      [name]: true,
+    }));
   };
 
   const isFieldValid = (value: string) => {
     return value.trim() !== "";
+  };
+
+  const handleFormSubmit = () => {
+    setFormSubmitted(true);
+
+    const isValid = Object.keys(formData).every((key) => {
+      if (key in touched) {
+        return isFieldValid(formData[key as keyof FormData]);
+      }
+      return true;
+    });
+
+    if (!isValid) {
+      return; // prevent submission if the form is invalid
+    }
+
+    createOrder({ userData: formData, cart });
+    routes.push("/success"); // Redirect to a success page or show success message
   };
 
   function generateOrderID(): string {
@@ -111,34 +137,41 @@ export default function Checkout() {
         <Input
           isRequired
           isClearable
-          type="name"
+          type="text"
           name="name"
           label="Nombre"
           placeholder="Tu nombre"
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.name)}
+          isInvalid={
+            (formSubmitted || touched.name) && !isFieldValid(formData.name)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
           isRequired
           isClearable
-          type="lastname"
+          type="text"
           name="lastname"
           label="Apellido"
           placeholder="Tu apellido"
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.lastname)}
+          isInvalid={
+            (formSubmitted || touched.lastname) &&
+            !isFieldValid(formData.lastname)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
           isRequired
           isClearable
-          type="id"
+          type="text"
           name="id"
           label="DNI"
           placeholder="Tu DNI"
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.id)}
+          isInvalid={
+            (formSubmitted || touched.id) && !isFieldValid(formData.id)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
@@ -149,18 +182,22 @@ export default function Checkout() {
           label="Email"
           placeholder="tuemail@email.com"
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.email)}
+          isInvalid={
+            (formSubmitted || touched.email) && !isFieldValid(formData.email)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
           isRequired
           isClearable
-          type="phone"
+          type="text"
           name="phone"
           label="Teléfono"
           placeholder="11 1234 1234"
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.phone)}
+          isInvalid={
+            (formSubmitted || touched.phone) && !isFieldValid(formData.phone)
+          }
           errorMessage="Campo obligatorio"
         />
         <Divider className="my-4" />
@@ -172,12 +209,15 @@ export default function Checkout() {
           <Input
             isRequired
             isClearable
-            type="address"
+            type="text"
             name="postal"
             label="Código postal"
             placeholder="..."
             onChange={handleInputChange}
-            isInvalid={!formValidity && !isFieldValid(formData.postal)}
+            isInvalid={
+              (formSubmitted || touched.postal) &&
+              !isFieldValid(formData.postal)
+            }
             errorMessage="Campo obligatorio"
           />
           <Link
@@ -191,34 +231,40 @@ export default function Checkout() {
         <Input
           isRequired
           isClearable
-          type="address"
+          type="text"
           name="local"
           label="Localidad"
           placeholder="..."
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.local)}
+          isInvalid={
+            (formSubmitted || touched.local) && !isFieldValid(formData.local)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
           isRequired
           isClearable
-          type="address"
+          type="text"
           name="street"
           label="Calle"
           placeholder="..."
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.street)}
+          isInvalid={
+            (formSubmitted || touched.street) && !isFieldValid(formData.street)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
           isRequired
           isClearable
-          type="number"
+          type="text"
           name="number"
           label="Número"
           placeholder="..."
           onChange={handleInputChange}
-          isInvalid={!formValidity && !isFieldValid(formData.number)}
+          isInvalid={
+            (formSubmitted || touched.number) && !isFieldValid(formData.number)
+          }
           errorMessage="Campo obligatorio"
         />
         <Input
