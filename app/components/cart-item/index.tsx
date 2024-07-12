@@ -8,12 +8,12 @@ import { ProductType } from "@/app/types";
 export default function CartItem({ product }: { product: ProductType }) {
   const { deleteProduct } = useCartContext();
 
-  const { id, name, pics, price } = product;
+  const { _id, name, pics, price } = product;
 
   return (
     <div className="relative flex items-center justify-between mx-2 px-4 py-3  bg-neutral-100 dark:bg-neutral-700 rounded-lg drop-shadow-md">
       <Button
-        onClick={() => deleteProduct(id)}
+        onClick={() => deleteProduct(_id)}
         className="absolute top-[-25%] right-0 rounded-full w-3"
         isIconOnly
         size="sm"
