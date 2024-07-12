@@ -43,12 +43,12 @@ const CartProvider: React.FC<{ children?: React.ReactNode }> = ({
   }, [cart]);
 
   const addToCart = (product: ProductType) => {
-    const existingProduct = cart.find((item) => item.id === product.id);
+    const existingProduct = cart.find((item) => item._id === product._id);
 
     if (existingProduct) {
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, quantity: item.quantity + product.quantity }
             : item
         )
@@ -64,7 +64,7 @@ const CartProvider: React.FC<{ children?: React.ReactNode }> = ({
   };
 
   const deleteProduct = (productId: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
   };
 
   return (
