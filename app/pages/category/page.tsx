@@ -22,6 +22,8 @@ export default function Category({ searchParams }: Props) {
         ? searchParams._id[0]
         : searchParams._id || "";
 
+      console.log("Category ID:", categoryId);
+
       const response = await fetch(`/api/products?category=${categoryId}`);
       if (!response.ok) {
         console.error("Failed to fetch products", response.status);

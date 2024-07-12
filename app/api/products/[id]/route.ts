@@ -7,6 +7,8 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const id = url.pathname.split("/").pop();
 
+    console.log("ID received:", id);
+
     if (!id) {
       return NextResponse.json(
         { message: "Product ID is required" },
