@@ -28,7 +28,7 @@ export default function CartItem({ product }: { product: ProductType }) {
           <Link
             href={{
               pathname: "product",
-              query: { _id: product.id },
+              query: { _id: product._id },
             }}
             className="text-blue-500"
           >

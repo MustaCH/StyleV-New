@@ -6,7 +6,7 @@ import { useCartContext } from "@/app/providers";
 import { ProductType } from "@/app/types";
 
 export default function CheckoutItem({ product }: { product: ProductType }) {
-  const { id, name, pics, price } = product;
+  const { _id, name, pics, price } = product;
 
   return (
     <div className="relative flex items-center justify-between mx-2 px-4 py-3  bg-transparent ">
