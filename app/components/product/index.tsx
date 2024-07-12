@@ -63,22 +63,26 @@ export default function Product({
           <p className="text-xl">${price}</p>
           <p className="capitalize text-xs">Color: {color}</p>
           <p className="uppercase ">Tabla de medidas:</p>
-          <Table aria-label="Tabla de medidas">
-            <TableHeader>
-              {Object.keys(measures).map((measureKey) => (
-                <TableColumn className="text-center" key={measureKey}>
-                  {measureKey}
-                </TableColumn>
-              ))}
-            </TableHeader>
-            <TableBody>
-              <TableRow className="text-center" key="1">
-                {Object.values(measures).map((measureValue) => (
-                  <TableCell key={measureValue}>{measureValue}</TableCell>
+          {measures && Object.keys(measures).length > 0 ? (
+            <Table aria-label="Tabla de medidas">
+              <TableHeader>
+                {Object.keys(measures).map((measureKey) => (
+                  <TableColumn className="text-center" key={measureKey}>
+                    {measureKey}
+                  </TableColumn>
                 ))}
-              </TableRow>
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                <TableRow className="text-center" key="1">
+                  {Object.values(measures).map((measureValue) => (
+                    <TableCell key={measureValue}>{measureValue}</TableCell>
+                  ))}
+                </TableRow>
+              </TableBody>
+            </Table>
+          ) : (
+            <p>No measures available</p>
+          )}
           <Button
             onClick={() => {
               addToCart({

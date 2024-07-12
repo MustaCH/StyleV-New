@@ -23,6 +23,10 @@ export default function Category({ searchParams }: Props) {
         : searchParams._id || "";
 
       const response = await fetch(`/api/products?category=${categoryId}`);
+      if (!response.ok) {
+        console.error("Failed to fetch products", response.status);
+        return;
+      }
       const data: ProductType[] = await response.json();
 
       setProducts(data);

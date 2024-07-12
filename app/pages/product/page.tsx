@@ -17,7 +17,15 @@ const ProductPage = ({ searchParams }: Props) => {
   useEffect(() => {
     async function fetchData() {
       const id = searchParams._id;
+      if (!id) {
+        console.error("Product ID is required");
+        return;
+      }
       const response = await fetch(`/api/products/${id}`);
+      if (!response.ok) {
+        console.error("Failed to fetch product", response.status);
+        return;
+      }
       const data = await response.json();
 
       setProduct(data);
