@@ -5,7 +5,7 @@ import clientPromise from "@/utils/mongodb";
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
-    const id = url.pathname.split("/").pop();
+    const id = url.pathname.split("/").filter(Boolean).pop();
 
     if (!id) {
       return NextResponse.json(

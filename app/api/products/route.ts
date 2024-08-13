@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     const category = searchParams.get("category");
 
     const client = await clientPromise;
-    const db = client.db("test"); // Replace with your database name
+    const db = client.db("test"); 
 
     const query = category ? { category } : {};
     const products = await db.collection("prods").find(query).toArray();

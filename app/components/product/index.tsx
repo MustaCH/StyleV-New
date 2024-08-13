@@ -61,7 +61,6 @@ export default function Product({
         <div className="flex flex-col gap-4">
           <h4 className="font-bold text-3xl">{name}</h4>
           <p className="text-xl">${price}</p>
-          <p className="capitalize text-xs">Color: {color}</p>
           <p className="uppercase ">Tabla de medidas:</p>
           {measures && Object.keys(measures).length > 0 ? (
             <Table aria-label="Tabla de medidas">
