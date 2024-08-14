@@ -9,28 +9,12 @@ export async function GET(req: NextRequest) {
     const client = await clientPromise;
     const db = client.db("test");
 
+    // Check if a category is provided, if not, return all products
     const query = category ? { category } : {};
-    const products = await db.collection("prods").find(query).toArray();
-
-    return NextResponse.json(products);
-  } catch (e) {
-    console.error(e);
-    return NextResponse.json(
-      { message: "Unable to fetch products" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GetAllProducts(req: NextRequest) {
-  try {
-    const client = await clientPromise;
-    const db = client.db("test");
-
     const products = await db
       .collection("prods")
-      .find({})
-      .sort({ _id: -1 }) 
+      .find(query)
+      .sort({ _id: -1 }) // Sort by newest first
       .toArray();
 
     return NextResponse.json(products);

@@ -23,6 +23,8 @@ import { useRouter } from "next/navigation";
 import { ProductType } from "@/app/types";
 import { useCartContext } from "@/app/providers";
 
+const indexToLetter = (index: number) => String.fromCharCode(65 + index);
+
 export default function Product({
   _id,
   name,
@@ -61,27 +63,40 @@ export default function Product({
         <div className="flex flex-col gap-4">
           <h4 className="font-bold text-3xl">{name}</h4>
           <p className="text-xl">${price}</p>
-          <p className="uppercase ">Tabla de medidas:</p>
-          {measures && Object.keys(measures).length > 0 ? (
+         {category === 'Calzado' ? <></> : <p className="uppercase">Tabla de medidas:</p>}
+         {category !== 'Calzado' ? (
+          measures && Object.keys(measures).length > 0 ? (
             <Table aria-label="Tabla de medidas">
               <TableHeader>
-                {Object.keys(measures).map((measureKey) => (
+                {Object.keys(measures).map((measureKey, index) => (
                   <TableColumn className="text-center" key={measureKey}>
-                    {measureKey}
+                    {indexToLetter(index)}
                   </TableColumn>
                 ))}
               </TableHeader>
               <TableBody>
                 <TableRow className="text-center" key="1">
-                  {Object.values(measures).map((measureValue) => (
-                    <TableCell key={measureValue}>{measureValue}</TableCell>
+                  {Object.values(measures).map((measureValue, index) => (
+                    <TableCell key={indexToLetter(index)}>
+                      {measureValue}
+                    </TableCell>
                   ))}
                 </TableRow>
               </TableBody>
             </Table>
           ) : (
-            <p>No measures available</p>
-          )}
+            <p>No hay medidas disponibles</p>
+          )
+         ) : (
+          measures && Object.keys(measures).length > 0 ? (
+            <p>
+              Talle: {Object.values(measures)[0]}
+            </p>
+          ) : (
+            <p>No hay medidas disponibles</p>
+          )
+         )}
+          
           <Button
             onClick={() => {
               addToCart({

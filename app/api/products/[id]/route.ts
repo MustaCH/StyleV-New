@@ -7,13 +7,6 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const id = url.pathname.split("/").pop();
 
-    if (!id) {
-      return NextResponse.json(
-        { message: "Product ID is required" },
-        { status: 400 }
-      );
-    }
-
     const client = await clientPromise;
     const db = client.db("test");
     const product = await db
@@ -27,6 +20,13 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    if (!id) {
+      return NextResponse.json(
+        { message: "Product ID is required" },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(product);
   } catch (e) {
     console.error(e);
@@ -34,5 +34,8 @@ export async function GET(req: NextRequest) {
       { message: "Unable to fetch product" },
       { status: 500 }
     );
+    
   }
+
+  
 }
