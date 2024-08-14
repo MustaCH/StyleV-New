@@ -5,7 +5,7 @@ import clientPromise from "@/utils/mongodb";
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
-    const id = url.searchParams.get("_id"); // Extract the `_id` from query parameters
+    const id = url.pathname.split("/").pop();
 
     if (!id) {
       return NextResponse.json(
