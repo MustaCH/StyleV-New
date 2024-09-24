@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const id = await url.pathname.split("/").pop();
+    console.log('ID:', id)
 
     const client = await clientPromise;
     const db = client.db("test");
